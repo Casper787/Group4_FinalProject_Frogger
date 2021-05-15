@@ -8,9 +8,6 @@ def main():
 
 
 def screenSetup():
-    # win = GraphWin("Frogger", 1000, 1000, autoflush=False)
-    # win.setBackground("black")
-    # win.setCoords(0, 100, 100, 0)
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
     finishLine.draw(win)
