@@ -33,22 +33,41 @@ def screenSetup():
     line5.draw(win)
 
 def misterFrog():
-    froggo = Image(Point(40, 50), "senor_froggo.png")
+    froggo = Image(Point(44.5, 50), "senor_froggo.png")
     froggo.draw(win)
+    game_loop(froggo)
+
+# *************** beta function ***************
+def game_loop(froggo):          
+    while True:
+        froggo_center = froggo.getAnchor()
+        if(froggo_center.getX() < 90):
+            frogMover(froggo)
+            update()
+        else:
+            
+            # level +=
+            pass
+# *************** beta function ***************
 
 # def objectSetup():
 #   same structure as screenSetup() but for obstacle elements
 
 
-# def frogMover(**takes frog as arguement**):
-#   structure that takes last pressed key and acts accordingly
-#   ex.
-#       if(key is left):
-#           move frog left
-#           break
-#       if(key is right):
-#           move frog right
-#           break
+def frogMover(froggo):
+    mover = win.checkKey()
+    if(mover == 'Up'):
+        froggo.move(0,-10)
+    elif(mover == 'Down'):
+        froggo.move(0,10)
+    elif(mover == 'Right'):
+        froggo.move(10,0)
+    elif(mover == 'Left'):
+        froggo.move(-10,0)
+    elif(mover == 'x'):
+        win.close
+    else:
+        pass
 
 
 win = GraphWin("Frogger", 1000, 1000, autoflush=False)
