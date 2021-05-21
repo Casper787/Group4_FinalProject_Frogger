@@ -37,42 +37,42 @@ def screenSetup():
     line5.draw(win)
 
 def misterFrog():
-    froggo = Image(Point(40, 50), "senor_froggo.png")
+    froggo = Image(Point(40, 50), r'Images\senor_froggo.png')
     froggo.draw(win)
 
 def Truck():
-    Truck = Image(Point(55, 50), "Truck_image.png")
+    Truck = Image(Point(55, 50), r'Images\Truck_image.png')
     Truck.draw(win)
-    Truck = Image(Point(85,20),"Truck_image.png")
+    Truck = Image(Point(85,20),r'Images\Truck_image.png')
     Truck.draw(win)
-    Truck = Image(Point(95,95),"Truck_image.png")
+    Truck = Image(Point(95,95),r'Images\Truck_image.png')
     Truck.draw(win)
     
 def Car():
-    Car = Image(Point(75, 35), "Car_image.png")
+    Car = Image(Point(75, 35), r'Images\Car_image.png')
     Car.draw(win)
-    Car = Image(Point(65, 80), "Car_image.png")
+    Car = Image(Point(65, 80), r'Images\Truck_image.png')
     Car.draw(win)
-    Car = Image(Point(95, 65), "CarDown_image.png")
+    Car = Image(Point(95, 65), r'Images\CarDown_image.png')
     Car.draw(win)
     
 def PinkCar():
-    PinkCar = Image(Point(85, 50), "PinkCarDown_image.png")
+    PinkCar = Image(Point(85, 50), r'Images\PinkCarDown_image.png')
     PinkCar.draw(win)
-    PinkCar = Image(Point(85, 80), "PinkCarDown_image.png")
+    PinkCar = Image(Point(85, 80), r'Images\PinkCarDown_image.png')
     PinkCar.draw(win)
-    PinkCar = Image(Point(65, 10), "PinkCarUp_image.png")
+    PinkCar = Image(Point(65, 10), r'Images\PinkCarUp_image.png')
     PinkCar.draw(win)
-    PinkCar = Image(Point(55, 95), "PinkCarDown_image.png")
+    PinkCar = Image(Point(55, 95), r'Images\PinkCarDown_image.png')
     PinkCar.draw(win)
     
 
 def BlueCar():
-    BlueCar = Image(Point(55, 20), "BlueCarDown_image.png")
+    BlueCar = Image(Point(55, 20), r'Images\BlueCarDown_image.png')
     BlueCar.draw(win)
-    BlueCar = Image(Point(75, 65), "BlueCarUp_image.png")
+    BlueCar = Image(Point(75, 65), r'Images\BlueCarUp_image.png')
     BlueCar.draw(win)
-    BlueCar = Image(Point(95, 35), "BlueCarDown_image.png")
+    BlueCar = Image(Point(95, 35),  r'Images\BluecarDown_image.png')
     BlueCar.draw(win)
     
 # def objectSetup():
