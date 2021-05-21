@@ -3,6 +3,10 @@ from graphics import *
 def main():
     screenSetup()
     misterFrog()
+    Truck()
+    Car()
+    PinkCar()
+    BlueCar()
     win.getMouse()
     win.close()
 
@@ -50,6 +54,41 @@ def game_loop(froggo):
             pass
 # *************** beta function ***************
 
+def Truck():
+    Truck = Image(Point(55, 50), "Truck_image.png")
+    Truck.draw(win)
+    Truck = Image(Point(85,20),"Truck_image.png")
+    Truck.draw(win)
+    Truck = Image(Point(95,95),"Truck_image.png")
+    Truck.draw(win)
+    
+def Car():
+    Car = Image(Point(75, 35), "Car_image.png")
+    Car.draw(win)
+    Car = Image(Point(65, 80), "Car_image.png")
+    Car.draw(win)
+    Car = Image(Point(95, 65), "CarDown_image.png")
+    Car.draw(win)
+    
+def PinkCar():
+    PinkCar = Image(Point(85, 50), "PinkCarDown_image.png")
+    PinkCar.draw(win)
+    PinkCar = Image(Point(85, 80), "PinkCarDown_image.png")
+    PinkCar.draw(win)
+    PinkCar = Image(Point(65, 10), "PinkCarUp_image.png")
+    PinkCar.draw(win)
+    PinkCar = Image(Point(55, 95), "PinkCarDown_image.png")
+    PinkCar.draw(win)
+    
+
+def BlueCar():
+    BlueCar = Image(Point(55, 20), "BlueCarDown_image.png")
+    BlueCar.draw(win)
+    BlueCar = Image(Point(75, 65), "BlueCarUp_image.png")
+    BlueCar.draw(win)
+    BlueCar = Image(Point(95, 35), "BlueCarDown_image.png")
+    BlueCar.draw(win)
+    
 # def objectSetup():
 #   same structure as screenSetup() but for obstacle elements
 
