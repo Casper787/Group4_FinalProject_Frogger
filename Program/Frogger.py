@@ -1,15 +1,5 @@
 from graphics import *
 
-def main():
-    screenSetup()
-    Truck()
-    Car()
-    PinkCar()
-    BlueCar()
-    misterFrog()
-    win.getMouse()
-    win.close()
-
 def screenSetup():
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
@@ -41,7 +31,7 @@ def misterFrog():
     game_loop(froggo)
 
 def Truck():
-    truck = Image(Point(55, 50), r'Images\Truck_image.png')
+    truck = Image(Point(55, 50), r'Images\truck_image.png')
     truck.draw(win)
     # truck = Image(Point(85,20),r'Images\Truck_image.png')
     # truck.draw(win)
@@ -49,36 +39,33 @@ def Truck():
     # truck.draw(win)
     return truck
     
-def Car():
-    car = Image(Point(75, 35), r'Images\Car_image.png')
-    car.draw(win)
-    car = Image(Point(65, 80), r'Images\Truck_image.png')
-    car.draw(win)
-    car = Image(Point(95, 65), r'Images\CarDown_image.png')
-    car.draw(win)
+# def Car():
+#     car = Image(Point(75, 35), r'Images\car_image.png')
+#     car.draw(win)
+#     car = Image(Point(65, 80), r'Images\truck_image.png')
+#     car.draw(win)
+#     car = Image(Point(95, 65), r'Images\carDown_image.png')
+#     car.draw(win)
     
-def PinkCar():
-    pinkCar = Image(Point(85, 50), r'Images\PinkCarDown_image.png')
-    pinkCar.draw(win)
-    pinkCar = Image(Point(85, 80), r'Images\PinkCarDown_image.png')
-    pinkCar.draw(win)
-    pinkCar = Image(Point(65, 10), r'Images\PinkCarUp_image.png')
-    pinkCar.draw(win)
-    pinkCar = Image(Point(55, 95), r'Images\PinkCarDown_image.png')
-    pinkCar.draw(win)
+# def PinkCar():
+#     pinkCar = Image(Point(85, 50), r'Images\pinkCarDown_image.png')
+#     pinkCar.draw(win)
+#     pinkCar = Image(Point(85, 80), r'Images\pinkCarDown_image.png')
+#     pinkCar.draw(win)
+#     pinkCar = Image(Point(65, 10), r'Images\pinkCarUp_image.png')
+#     pinkCar.draw(win)
+#     pinkCar = Image(Point(55, 95), r'Images\pinkCarDown_image.png')
+#     pinkCar.draw(win)
     
 
 def BlueCar():
-    blueCar = Image(Point(55, 20), r'Images\BlueCarDown_image.png')
+    blueCar = Image(Point(55, 20), r'Images\blueCarDown_image.png')
     blueCar.draw(win)
     # blueCar = Image(Point(75, 65), r'Images\BlueCarUp_image.png')
     # blueCar.draw(win)
     # blueCar = Image(Point(95, 35),  r'Images\BluecarDown_image.png')
     # blueCar.draw(win)
     
-# *************** beta function ***************
-
-# *************** beta function ***************
 
 def car_move(truck):
     truck.move(0, 25)
@@ -116,13 +103,13 @@ def game_loop(froggo):
 
 def main():
     screenSetup()
-    Car()
-    PinkCar()
-    BlueCar()
+    # Car()
+    # PinkCar()
+    # BlueCar()
     misterFrog()
     win.getMouse()
     win.close()
-    
+
 
 if __name__ =="__main__":
     main()
