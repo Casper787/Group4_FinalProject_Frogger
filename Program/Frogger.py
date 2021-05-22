@@ -1,5 +1,15 @@
 from graphics import *
 
+def main():
+    screenSetup()
+    Truck()
+    Car()
+    PinkCar()
+    BlueCar()
+    misterFrog()
+    win.getMouse()
+    win.close()
+
 def screenSetup():
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
