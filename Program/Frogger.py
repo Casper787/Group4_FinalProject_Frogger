@@ -1,16 +1,5 @@
 from graphics import *
 
-def main():
-    screenSetup()
-    misterFrog()
-    Truck()
-    Car()
-    PinkCar()
-    BlueCar()
-    win.getMouse()
-    win.close()
-
-
 def screenSetup():
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
@@ -39,58 +28,90 @@ def screenSetup():
 def misterFrog():
     froggo = Image(Point(40, 50), r'Images\senor_froggo.png')
     froggo.draw(win)
+    game_loop(froggo)
 
 def Truck():
-    Truck = Image(Point(55, 50), r'Images\Truck_image.png')
-    Truck.draw(win)
-    Truck = Image(Point(85,20),r'Images\Truck_image.png')
-    Truck.draw(win)
-    Truck = Image(Point(95,95),r'Images\Truck_image.png')
-    Truck.draw(win)
+    truck = Image(Point(55, 50), r'Images\Truck_image.png')
+    truck.draw(win)
+    # truck = Image(Point(85,20),r'Images\Truck_image.png')
+    # truck.draw(win)
+    # truck = Image(Point(95,95),r'Images\Truck_image.png')
+    # truck.draw(win)
+    return truck
     
 def Car():
-    Car = Image(Point(75, 35), r'Images\Car_image.png')
-    Car.draw(win)
-    Car = Image(Point(65, 80), r'Images\Truck_image.png')
-    Car.draw(win)
-    Car = Image(Point(95, 65), r'Images\CarDown_image.png')
-    Car.draw(win)
+    car = Image(Point(75, 35), r'Images\Car_image.png')
+    car.draw(win)
+    car = Image(Point(65, 80), r'Images\Truck_image.png')
+    car.draw(win)
+    car = Image(Point(95, 65), r'Images\CarDown_image.png')
+    car.draw(win)
     
 def PinkCar():
-    PinkCar = Image(Point(85, 50), r'Images\PinkCarDown_image.png')
-    PinkCar.draw(win)
-    PinkCar = Image(Point(85, 80), r'Images\PinkCarDown_image.png')
-    PinkCar.draw(win)
-    PinkCar = Image(Point(65, 10), r'Images\PinkCarUp_image.png')
-    PinkCar.draw(win)
-    PinkCar = Image(Point(55, 95), r'Images\PinkCarDown_image.png')
-    PinkCar.draw(win)
+    pinkCar = Image(Point(85, 50), r'Images\PinkCarDown_image.png')
+    pinkCar.draw(win)
+    pinkCar = Image(Point(85, 80), r'Images\PinkCarDown_image.png')
+    pinkCar.draw(win)
+    pinkCar = Image(Point(65, 10), r'Images\PinkCarUp_image.png')
+    pinkCar.draw(win)
+    pinkCar = Image(Point(55, 95), r'Images\PinkCarDown_image.png')
+    pinkCar.draw(win)
     
 
 def BlueCar():
-    BlueCar = Image(Point(55, 20), r'Images\BlueCarDown_image.png')
-    BlueCar.draw(win)
-    BlueCar = Image(Point(75, 65), r'Images\BlueCarUp_image.png')
-    BlueCar.draw(win)
-    BlueCar = Image(Point(95, 35),  r'Images\BluecarDown_image.png')
-    BlueCar.draw(win)
+    blueCar = Image(Point(55, 20), r'Images\BlueCarDown_image.png')
+    blueCar.draw(win)
+    # blueCar = Image(Point(75, 65), r'Images\BlueCarUp_image.png')
+    # blueCar.draw(win)
+    # blueCar = Image(Point(95, 35),  r'Images\BluecarDown_image.png')
+    # blueCar.draw(win)
     
-# def objectSetup():
-#   same structure as screenSetup() but for obstacle elements
+# *************** beta function ***************
 
+# *************** beta function ***************
 
-# def frogMover(**takes frog as arguement**):
-#   structure that takes last pressed key and acts accordingly
-#   ex.
-#       if(key is left):
-#           move frog left
-#           break
-#       if(key is right):
-#           move frog right
-#           break
+def car_move(truck):
+    truck.move(0, 25)
+    
 
+def frogMover(froggo):
+    mover = win.checkKey()
+    if(mover == 'Up'):
+        froggo.move(0,-5)
+    elif(mover == 'Down'):
+        froggo.move(0,5)
+    elif(mover == 'Right'):
+        froggo.move(5,0)
+    elif(mover == 'Left'):
+        froggo.move(-5,0)
+    elif(mover == 'x'):
+        win.close
+    else:
+        pass
 
 win = GraphWin("Frogger", 1000, 1000, autoflush=False)
 win.setBackground("black")
 win.setCoords(0, 100, 100, 0)
-main()
+
+def game_loop(froggo):          
+    while True:
+        froggo_center = froggo.getAnchor()
+        frogMover(froggo)
+        if(froggo_center.getX() < 100):
+            update(10)
+            temp = Truck()
+            car_move(temp)
+            
+            # level +=
+
+def main():
+    screenSetup()
+    Car()
+    PinkCar()
+    BlueCar()
+    misterFrog()
+    win.getMouse()
+    win.close()
+
+if __name__ =="__main__":
+    main()
