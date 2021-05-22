@@ -83,11 +83,16 @@ def game_loop(froggo):
         if(froggo_center.getX() < 90):
             frogMover(froggo)
             update()
+            car_move()
         else:
             
             # level +=
             break
 # *************** beta function ***************
+
+def car_move(BlueCar, Truck):
+    BlueCar.move(0,10)
+    Truck.move(0,25)
 
 def frogMover(froggo):
     mover = win.checkKey()
