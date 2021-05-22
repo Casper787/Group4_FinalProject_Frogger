@@ -2,11 +2,11 @@ from graphics import *
 
 def main():
     screenSetup()
-    misterFrog()
     Truck()
     Car()
     PinkCar()
     BlueCar()
+    misterFrog()
     win.getMouse()
     win.close()
 
@@ -86,7 +86,7 @@ def game_loop(froggo):
         else:
             
             # level +=
-            pass
+            break
 # *************** beta function ***************
 
 def frogMover(froggo):
