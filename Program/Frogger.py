@@ -3,7 +3,6 @@ from graphics import *
 def main():
     screenSetup()
     misterFrog()
-    frogMover(froggo)
     Truck()
     Car()
     PinkCar()
@@ -40,6 +39,7 @@ def screenSetup():
 def misterFrog():
     froggo = Image(Point(40, 50), r'Images\senor_froggo.png')
     froggo.draw(win)
+    game_loop(froggo)
 
 def Truck():
     Truck = Image(Point(55, 50), r'Images\Truck_image.png')
@@ -76,9 +76,18 @@ def BlueCar():
     BlueCar = Image(Point(95, 35),  r'Images\BluecarDown_image.png')
     BlueCar.draw(win)
     
-# def objectSetup():
-#   same structure as screenSetup() but for obstacle elements
-
+# *************** beta function ***************
+def game_loop(froggo):          
+    while True:
+        froggo_center = froggo.getAnchor()
+        if(froggo_center.getX() < 90):
+            frogMover(froggo)
+            update()
+        else:
+            
+            # level +=
+            pass
+# *************** beta function ***************
 
 def frogMover(froggo):
     mover = win.checkKey()
