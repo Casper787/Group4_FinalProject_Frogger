@@ -3,6 +3,7 @@ from graphics import *
 def main():
     screenSetup()
     misterFrog()
+    frogMover(froggo)
     Truck()
     Car()
     PinkCar()
