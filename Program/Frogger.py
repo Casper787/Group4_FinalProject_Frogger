@@ -53,15 +53,16 @@ def BlueCar():
     return blueCar
     
 
-def car_move(temp, temp1, temp2, temp3):
-    time.sleep(0.10)
-    temp.move(0,10)
-    temp_center = temp.getAnchor()
+def car_move(froggo, truck, temp1, temp2, temp3):
+    time.sleep(0.10)                # Every 0.10 seconds, move images
+    truck.move(0,10)                # Y coordinate = speed of movement
+    temp_center = truck.getAnchor()
     temp1_center = temp1.getAnchor()
     temp2_center = temp2.getAnchor()
     temp3_center = temp3.getAnchor()
-    if(temp_center.getY() > 120):
-        temp.move(0, -130)
+    die_froggo(froggo, truck)       # Only 1 vehicle until it works, then slowly input the rest
+    if(temp_center.getY() > 120):   # If vehicle is out of frame  
+        truck.move(0, -130)         # Move to the opposite side of the frame
     temp1.move(0,-27)
     if(temp1_center.getY() < -10):
         temp1.move(0, 160)
@@ -72,7 +73,18 @@ def car_move(temp, temp1, temp2, temp3):
     if(temp3_center.getY() > 106):
         temp3.move(0, -107)
 
-    
+def die_froggo(froggo, truck):
+    froggo_center = froggo.getAnchor()
+    froggo_hitbox = ######
+    truck_center = truck.getAnchor()
+    truck_hitbox = #######
+    print(truck_center)                             #For debugging purposes
+    print(truck_hitbox)                             #For debugging purposes
+    if(truck_hitbox.getCenter().getAnchor() > 120): #Same algorithm as line 64,65, to keep algorithm with the object
+        truck_hitbox.move(0, -130)
+    if(truck_hitbox.getCenter().getY() == froggo_hitbox.getCenter().getY() and truck_hitbox.getCenter().getX() == froggo_hitbox.getCenter().getX()):        #Wrong comparison. Should compare bottom Y coord of truck 
+                                                                                                                                                            #and top Y coord of frog, if they overlap, move frog back
+        froggo.move(-10, 0)
 
 def frogMover(froggo):
     mover = win.checkKey()
@@ -82,6 +94,7 @@ def frogMover(froggo):
         froggo.move(0,10)
     elif(mover == 'Right'):
         froggo.move(10,0)
+        print(froggo)           #For debugging purposes. To know where the frog's center lands
     elif(mover == 'Left'):
         froggo.move(-10,0)
     elif(mover == 'x'):
@@ -102,7 +115,7 @@ def game_loop(froggo, truck, car, blueCar, pinkCar):
             temp1 = car
             temp2 = blueCar
             temp3 = pinkCar
-            car_move(temp, temp1, temp2, temp3)
+            car_move(froggo, temp, temp1, temp2, temp3)
             
             # level +=
 
