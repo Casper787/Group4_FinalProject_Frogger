@@ -98,8 +98,8 @@ def collision(froggo, truck, car, pinkCar, blueCar):
     car_center = car.getAnchor()
     pinkCar_center = pinkCar.getAnchor() 
     blueCar_center = blueCar.getAnchor() 
-    # if frogger hits any car
-    if(truck_hit(froggo_center, truck_center) or car_hit() or pinkCar_hit() or blueCar_hit()): 
+    
+    if(truck_hit(froggo_center, truck_center) or car_hit(froggo_center, car_center) or pinkCar_hit(froggo_center, pinkCar_center) or blueCar_hit(froggo_center, blueCar_center)): 
         win_or_lose('L')
     else:
         pass
@@ -110,12 +110,24 @@ def truck_hit(froggo, truck):
     else:
         return False
 
-#def car_hit(froggo, car)
+def car_hit(froggo, car): 
+    if(froggo.getY() == car.getY() -3 and froggo.getX() == car.getX()):
+        return True
+    else:
+        return False
 
-#def pinkCar_hit(froggo, pinkCar)
+def pinkCar_hit(froggo, pinkCar): 
+    if(froggo.getY() == pinkCar.getY() +3 and froggo.getX() == pinkCar.getX()):
+        return True
+    else:
+        return False
 
-#def blueCar_hit(froggo, blueCar)
-    
+def blueCar_hit(froggo, blueCar): 
+    if(froggo.getY() == blueCar.getY() -2 and froggo.getX() == blueCar.getX()):
+            return True
+    else:
+        return False
+     
 def frogMover(froggo):
     mover = win.checkKey()
     if(mover == 'Up'):
