@@ -66,35 +66,35 @@ def car_move(froggo, truck, temp1, temp2, temp3):
     if(temp1_center.getY() < -10):
         temp1.move(0, 160)
     temp2.move(0,-5)
-    if(temp2_center.getY() < -5):
+    if(temp2_center.getY() < -15):
        temp2.move(0, 115)
     temp3.move(0,7)
     if(temp3_center.getY() > 106):
         temp3.move(0, -107)
 
-def collision(car, hit_truck, hit_car):
-    hits_the = t
-    # if frogger hits truck
-        froggo.hits_the(hit_truck.get_x(), hit_truck.get_y())
-        frogger.set_x_speed(hit_truck.get_x_speed())
-    # if frogger hits a car
-        froggo.hits_the(hit_car.get_x(), hit_car.get_y())
-        frogger.set_x_speed(hit_car.get_x_speed())
-    
+def WinOrLose(cond):
+    if(cond == 'L'):
+        win2 = GraphWin("Game Over", 100, 100)
+        message = "YOU LOST :frowning2:"
+    else:
+        win2 = GraphWin("Game Over", 100, 100)
+        message = "YOU WON :) " 
+    text = Text(Point(50, 50), message)
+    text.setTextColor("white") 
+    text.setSize(36)
+    text.setStyle(" bold")
+    text.draw(win2)
 
-def die_froggo(froggo, truck):
+def collision(froggo, truck, car, pinkCar, blueCar):
     froggo_center = froggo.getAnchor()
-    froggo_hitbox = ######
     truck_center = truck.getAnchor()
-    truck_hitbox = #######
-    print(truck_center)                             #For debugging purposes
-    print(truck_hitbox)                             #For debugging purposes
-    if(truck_hitbox.getCenter().getAnchor() > 120): #Same algorithm as line 64,65, to keep algorithm with the object
-        truck_hitbox.move(0, -130)
-    if(truck_hitbox.getCenter().getY() == froggo_hitbox.getCenter().getY() and truck_hitbox.getCenter().getX() == froggo_hitbox.getCenter().getX()):        #Wrong comparison. Should compare bottom Y coord of truck 
-                                                                                                                                                            #and top Y coord of frog, if they overlap, move frog back
-        froggo.move(-10, 0)
-        
+    car_center = car.getAnchor()
+    pinkCar_center = pinkCar.getAnchor() 
+    blueCar_center = blueCar.getAnchor() 
+    # if frogger hits any car
+    if (froggo_center.getX() == truck_center.getX() or froggo_center.getX() == car_center.getX() or froggo_center.getX() == pinkCar_center.getX() or  froggo_center.getX() == blueCar_center.getX()): 
+        WinOrLose('L')
+    
 def frogMover(froggo):
     mover = win.checkKey()
     if(mover == 'Up'):
@@ -111,6 +111,9 @@ def frogMover(froggo):
     else:
         pass
 
+lev = GraphWin("Frogger", 400, 200)
+lev.setBackground("black")
+
 win = GraphWin("Frogger", 1000, 1000, autoflush=False)
 win.setBackground("black")
 win.setCoords(0, 100, 100, 0)
@@ -125,7 +128,8 @@ def game_loop(froggo, truck, car, blueCar, pinkCar):
             temp2 = blueCar
             temp3 = pinkCar
             car_move(froggo, temp, temp1, temp2, temp3)
-            
+            collision(froggo,truck,car,pinkCar, blueCar)
+
             # level +=
 
 def main():
