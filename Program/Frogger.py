@@ -5,7 +5,7 @@ def screenSetup():
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
     finishLine.draw(win)
-
+    
     line1 = Rectangle(Point(89, 100), Point(90, 0))
     line1.setFill("white")
     line1.draw(win)
@@ -25,7 +25,7 @@ def screenSetup():
     line5 = Rectangle(Point(49,100), Point(50, 0))
     line5.setFill("white")
     line5.draw(win)
-
+    
 def misterFrog(truck, car, blueCar, pinkCar):
     froggo = Image(Point(44.5, 50), r'Images\senor_froggo.png')
     froggo.draw(win)
@@ -73,19 +73,57 @@ def car_move(froggo, truck, temp1, temp2, temp3):
         temp3.move(0, -107)
     collision(froggo,truck,temp1,temp2, temp3)
 
-def win_or_lose(cond):
+def win_or_lose(cond, froggo, truck, car, blueCar, pinkCar):
     if(cond == 'L'):
         win2 = GraphWin("Game Over", 300, 300)
-        message = "YOU LOST :frowning2:"
-    else:
+        message = "YOU LOST :( "
+    elif(cond == 'W'):
         win2 = GraphWin("GG", 300, 300)
         message = "YOU WON :) " 
-    text = Text(Point(50, 50), message)
+        
+    win2.setBackground("black")
+    text = Text(Point(150, 150), message)
     text.setTextColor("white") 
-    text.setSize(24)
+    text.setSize(30)
     text.setStyle("bold")
     text.draw(win2)
+    
+    # Play Again game button
+    playAgain = Rectangle(Point(175, 255), Point(285, 285))
+    playAgain.setWidth(3)
+    playAgain.setOutline("white")
+    playAgain.draw(win2)
+    
+    playAgainLabel = Text(Point(230, 270), "PLAY AGAIN")
+    playAgainLabel.setStyle("bold")
+    playAgainLabel.setTextColor("white")
+    playAgainLabel.draw(win2)
+
+    # Quit game button
+    quitGame = Rectangle(Point(15, 255), Point(65, 285))
+    quitGame.setWidth(3)
+    quitGame.setOutline("white")
+    quitGame.draw(win2)
+    
+    quitGameLabel = Text(Point(40, 270), "QUIT")
+    quitGameLabel.setStyle("bold")
+    quitGameLabel.setTextColor("white")
+    quitGameLabel.draw(win2)
+
+    # If the player choses to play again the page will close and another 
+    # game will start and if he chooses to quit the window will close
     click = win2.getMouse()
+    if click.getX() >= 175 and click.getX() <= 285 and click.getY() >= 255 and click.getY() <= 285:
+        froggo.undraw()
+        truck.undraw()
+        car.undraw()
+        blueCar.undraw()
+        pinkCar.undraw()
+        main()
+        
+    if click.getX() >= 15 and click.getX() <= 65 and click.getY() >= 255 and click.getY() <= 285:
+        win.close()
+        
     for i in range(300):
         time.sleep(1)
         if(click.getX() < 150):         #Implement buttons on the screen for user options
@@ -100,7 +138,7 @@ def collision(froggo, truck, car, pinkCar, blueCar):
     blueCar_center = blueCar.getAnchor() 
     
     if(truck_hit(froggo_center, truck_center) or car_hit(froggo_center, car_center) or pinkCar_hit(froggo_center, pinkCar_center) or blueCar_hit(froggo_center, blueCar_center)): 
-        win_or_lose('L')
+        win_or_lose('L', froggo, truck, car, blueCar, pinkCar)
     else:
         pass
 
@@ -152,15 +190,14 @@ def game_loop(froggo, truck, car, blueCar, pinkCar):
     while True:
         froggo_center = froggo.getAnchor()
         frogMover(froggo)
-        if(froggo_center.getX() < 100):
+        if(froggo_center.getX() < 94.5):
             temp = truck
             temp1 = car
             temp2 = blueCar
             temp3 = pinkCar
             car_move(froggo, temp, temp1, temp2, temp3)
-        else:
-            win_or_lose('W')
-            # level +=
+        elif(froggo_center.getX() == 94.5):
+            win_or_lose('W', froggo, truck, car, blueCar, pinkCar)
 
 def main():
     screenSetup()
@@ -169,9 +206,6 @@ def main():
     pinkCar = PinkCar()
     blueCar = BlueCar()
     misterFrog(truck, car, blueCar, pinkCar)
-    win.getMouse()
-    win.close()
-
 
 if __name__ =="__main__":
     main()
