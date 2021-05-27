@@ -67,7 +67,7 @@ def car_move(froggo, truck, temp1, temp2, temp3):
         temp1.move(0, 160)
     temp2.move(0,-5)
     if(temp2_center.getY() < -15):
-       temp2.move(0, 115)
+        temp2.move(0, 115)
     temp3.move(0,7)
     if(temp3_center.getY() > 106):
         temp3.move(0, -107)
@@ -105,25 +105,25 @@ def collision(froggo, truck, car, pinkCar, blueCar):
         pass
 
 def truck_hit(froggo, truck):
-    if(froggo.getY() == truck.getY() + 10 and froggo.getX() == truck.getX()):
+    if(froggo.getY() >= truck.getY() - 10 and froggo.getY() <= truck.getY() + 10 and froggo.getX() == truck.getX()):
         return True
     else:
         return False
 
 def car_hit(froggo, car): 
-    if(froggo.getY() == car.getY() -3 and froggo.getX() == car.getX()):
+    if(froggo.getY() >= car.getY() - 1 and froggo.getY() <= car.getY() + 1 and froggo.getX() == car.getX()):
         return True
     else:
         return False
 
 def pinkCar_hit(froggo, pinkCar): 
-    if(froggo.getY() == pinkCar.getY() +3 and froggo.getX() == pinkCar.getX()):
+    if(froggo.getY() >= pinkCar.getY() - 1 and froggo.getY() <= pinkCar.getY() + 1 and froggo.getX() == pinkCar.getX()):
         return True
     else:
         return False
 
 def blueCar_hit(froggo, blueCar): 
-    if(froggo.getY() == blueCar.getY() -2 and froggo.getX() == blueCar.getX()):
+    if(froggo.getY() >= blueCar.getY() - 1 and froggo.getY() <= blueCar.getY() + 1 and froggo.getX() == blueCar.getX()):
             return True
     else:
         return False
