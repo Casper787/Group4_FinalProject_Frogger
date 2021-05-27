@@ -32,36 +32,36 @@ def misterFrog(truck, car, blueCar, pinkCar):
     game_loop(froggo, truck, car, blueCar, pinkCar)
 
 def Truck():
-    truck = Image(Point(55, 50), r'Images\truck_image.png')
+    truck = Image(Point(54.5, 50), r'Images\truck_image.png')
     truck.draw(win)
     return truck
     
 def Car():
-    car = Image(Point(75, 35), r'Images\car_image.png')
+    car = Image(Point(74.5, 35), r'Images\car_image.png')
     car.draw(win)
     return car
     
 def PinkCar():
-    pinkCar = Image(Point(85, 50), r'Images\pinkCarDown_image.png')
+    pinkCar = Image(Point(84.5, 50), r'Images\pinkCarDown_image.png')
     pinkCar.draw(win)
     return pinkCar
     
 
 def BlueCar():
-    blueCar = Image(Point(65, 20), r'Images\blueCarDown_image.png')
+    blueCar = Image(Point(64.5, 20), r'Images\blueCarDown_image.png')
     blueCar.draw(win)
     return blueCar  
 
 def car_move(froggo, truck, temp1, temp2, temp3):
-    time.sleep(0.10)                # Every 0.10 seconds, move images
-    truck.move(0,10)                # Y coordinate = speed of movement
+    time.sleep(0.10)                    # Every 0.10 seconds, move images
+    truck.move(0,10)                    # Y coordinate = speed of movement
     temp_center = truck.getAnchor()
     temp1_center = temp1.getAnchor()
     temp2_center = temp2.getAnchor()
     temp3_center = temp3.getAnchor()
-                                    # Only 1 vehicle until it works, then slowly input the rest
-    if(temp_center.getY() > 120):   # If vehicle is out of frame  
-        truck.move(0, -130)         # Move to the opposite side of the frame
+                                        # Only 1 vehicle until it works, then slowly input the rest
+    if(temp_center.getY() > 120):       # If vehicle is out of frame  
+        truck.move(0, -130)             # Move to the opposite side of the frame
     temp1.move(0,-27)
     if(temp1_center.getY() < -10):
         temp1.move(0, 160)
@@ -71,19 +71,26 @@ def car_move(froggo, truck, temp1, temp2, temp3):
     temp3.move(0,7)
     if(temp3_center.getY() > 106):
         temp3.move(0, -107)
+    collision(froggo,truck,temp1,temp2, temp3)
 
-def WinOrLose(cond):
+def win_or_lose(cond):
     if(cond == 'L'):
-        win2 = GraphWin("Game Over", 100, 100)
+        win2 = GraphWin("Game Over", 300, 300)
         message = "YOU LOST :frowning2:"
     else:
-        win2 = GraphWin("Game Over", 100, 100)
+        win2 = GraphWin("GG", 300, 300)
         message = "YOU WON :) " 
     text = Text(Point(50, 50), message)
     text.setTextColor("white") 
-    text.setSize(36)
-    text.setStyle(" bold")
+    text.setSize(24)
+    text.setStyle("bold")
     text.draw(win2)
+    click = win2.getMouse()
+    for i in range(300):
+        time.sleep(1)
+        if(click.getX() < 150):         #Implement buttons on the screen for user options
+            win2.close()                #If user clicks quit, show game over screen
+                                        #If user clicks play again, call main()
 
 def collision(froggo, truck, car, pinkCar, blueCar):
     froggo_center = froggo.getAnchor()
@@ -92,8 +99,22 @@ def collision(froggo, truck, car, pinkCar, blueCar):
     pinkCar_center = pinkCar.getAnchor() 
     blueCar_center = blueCar.getAnchor() 
     # if frogger hits any car
-    if (froggo_center.getX() == truck_center.getX() or froggo_center.getX() == car_center.getX() or froggo_center.getX() == pinkCar_center.getX() or  froggo_center.getX() == blueCar_center.getX()): 
-        WinOrLose('L')
+    if(truck_hit(froggo_center, truck_center) or car_hit() or pinkCar_hit() or blueCar_hit()): 
+        win_or_lose('L')
+    else:
+        pass
+
+def truck_hit(froggo, truck):
+    if(froggo.getY() == truck.getY() + 10 and froggo.getX() == truck.getX()):
+        return True
+    else:
+        return False
+
+#def car_hit(froggo, car)
+
+#def pinkCar_hit(froggo, pinkCar)
+
+#def blueCar_hit(froggo, blueCar)
     
 def frogMover(froggo):
     mover = win.checkKey()
@@ -103,16 +124,13 @@ def frogMover(froggo):
         froggo.move(0,10)
     elif(mover == 'Right'):
         froggo.move(10,0)
-        print(froggo)           #For debugging purposes. To know where the frog's center lands
+        print(froggo)                   #For debugging purposes. To know where the frog's center lands
     elif(mover == 'Left'):
         froggo.move(-10,0)
     elif(mover == 'x'):
         win.close
     else:
         pass
-
-lev = GraphWin("Frogger", 400, 200)
-lev.setBackground("black")
 
 win = GraphWin("Frogger", 1000, 1000, autoflush=False)
 win.setBackground("black")
@@ -128,8 +146,8 @@ def game_loop(froggo, truck, car, blueCar, pinkCar):
             temp2 = blueCar
             temp3 = pinkCar
             car_move(froggo, temp, temp1, temp2, temp3)
-            collision(froggo,truck,car,pinkCar, blueCar)
-
+        else:
+            win_or_lose('W')
             # level +=
 
 def main():
