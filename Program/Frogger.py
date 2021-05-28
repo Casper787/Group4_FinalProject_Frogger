@@ -1,6 +1,7 @@
 from graphics import *
 import time
 
+# Game lanes
 def screenSetup(win):
     finishLine = Rectangle(Point(99, 100), Point(100, 0))
     finishLine.setFill("lime")
@@ -25,42 +26,45 @@ def screenSetup(win):
     line5 = Rectangle(Point(49,100), Point(50, 0))
     line5.setFill("white")
     line5.draw(win)
-    
+
+# Game frog 
 def misterFrog(truck, car, blueCar, pinkCar, win, level):
     froggo = Image(Point(44.5, 50), r'Images\senor_froggo.png')
     froggo.draw(win)
     game_loop(froggo, truck, car, blueCar, pinkCar, win, level)
-
+# Game truck
 def Truck(win):
     truck = Image(Point(54.5, 50), r'Images\truck_image.png')
     truck.draw(win)
     return truck
-    
+# Game red car
 def Car(win):
     car = Image(Point(74.5, 30), r'Images\car_image.png')
     car.draw(win)
     return car
-    
+# Game pink car  
 def PinkCar(win):
     pinkCar = Image(Point(84.5, 40), r'Images\pinkCarDown_image.png')
     pinkCar.draw(win)
     return pinkCar
-    
-
+# Game blue car
 def BlueCar(win):
     blueCar = Image(Point(64.5, 20), r'Images\blueCarUp_image.png')
     blueCar.draw(win)
     return blueCar
 
+# Moves cars in the Y direction
+# If car goes out of frame, moves the car to the opposite side of the frame
+# Creates the teleportation illusion reminiscent of Pac-man
 def car_move(froggo, truck, car, blue_car, pink_car, win, level):
-    time.sleep(0.05)  
+    time.sleep(0.05)                         # Every 0.05 seconds, vehicles will move, animation is smoother with this amount of seconds
     truck_center = truck.getAnchor()
     car_center = car.getAnchor()
     blue_car_center = blue_car.getAnchor()
-    pink_car_center = pink_car.getAnchor()                                  # Every 0.10 seconds, move images
+    pink_car_center = pink_car.getAnchor()                                  
     truck.move(0, 5 * level)                                                
-    if(truck_center.getY() > 120):                                          # If vehicle is out of frame
-        truck.move(0, -130)                                                 # Move to the opposite side of the frame
+    if(truck_center.getY() > 120):           # Verifies if vehicle is out of frame
+        truck.move(0, -130)                  # When TRUE, vehicle is moved to opposite side of frame
     car.move(0,-5 * level)
     if(car_center.getY() < -10):
         car.move(0, 160)
@@ -68,13 +72,12 @@ def car_move(froggo, truck, car, blue_car, pink_car, win, level):
     if(blue_car_center.getY() < -15):
         blue_car.move(0, 115)
     pink_car.move(0, 10 * level)
-    print(pink_car)
-    print(froggo)
     if(pink_car_center.getY() > 110):
         pink_car.move(0, -120)
-    collision(froggo, truck, car, blue_car, pink_car, win, level)
+    collision(froggo, truck, car, blue_car, pink_car, win, level)       # Checks if frog and a vehicle have crashed
 
-def win_or_lose(cond, win, level):
+
+def win_or_lose(cond, win, level):  # Verifies if user has won or lost and shows appropriate screen
     # User has lost if the condition sent is an 'L' 
     # Loss message is illustrated
     # Buttons generated are "Quit" and "Play Again"
@@ -97,6 +100,7 @@ def win_or_lose(cond, win, level):
         play_again_label.setStyle("bold")
         play_again_label.setTextColor("white")
         play_again_label.draw(win2)
+
     # User has lost if the condition sent is an 'W' 
     # Win message is illustrated
     # Buttons generated are "Quit" and "Next Level"
@@ -161,7 +165,7 @@ def collision(froggo, truck, car, blueCar,  pinkCar, win, level):
     blueCar_center = blueCar.getAnchor()
     
     if(truck_hit(froggo_center, truck_center) or car_hit(froggo_center, car_center) or pinkCar_hit(froggo_center, pinkCar_center) or blueCar_hit(froggo_center, blueCar_center)):
-        win_or_lose('L', win, level)
+        win_or_lose('L', win, level)        # Parameter 'L' has been passed meaning user has lost, loss screen is initialized
     else:
         pass
 # Will detect if the frog and the truck intersect
@@ -214,18 +218,18 @@ def game_loop(froggo, truck, car, blueCar, pinkCar, win, level):
             temp3 = pinkCar
             car_move(froggo, temp, temp1, temp2, temp3, win, level)         
         elif(froggo_center.getX() == 94.5):     # Frog has reached finish line
-            (win_or_lose('W', win, level))      # Win screen protocol has been initialized
+            (win_or_lose('W', win, level))      # Parameter 'W' has been sent meaning player has won, win screen is initialized
 
 def main(level):
-    win = GraphWin("Frogger", 1000, 1000, autoflush=False)
+    win = GraphWin("Frogger", 1000, 1000, autoflush=False)      # Game screen initiation
     win.setBackground("black")
     win.setCoords(0, 100, 100, 0)
-    screenSetup(win)
-    truck = Truck(win)
-    car = Car(win)
-    pinkCar = PinkCar(win)
+    screenSetup(win)                                            # Initializes screen lanes
+    truck = Truck(win)                                          # Vehicle functions return the vehicle
+    car = Car(win)                                              # Vehicles are stored in a variable for easier 
+    pinkCar = PinkCar(win)                                      #   management through functions
     blueCar = BlueCar(win)
-    misterFrog(truck, car, blueCar, pinkCar, win, level)
+    misterFrog(truck, car, blueCar, pinkCar, win, level)        # Creates frog, takes vehicles as parameters to then send these elements to the game loop 
 
 if __name__ =="__main__":
     level = 1
